@@ -1,5 +1,5 @@
 var canvasHeight = 480;
-var canvasWidth = 64;
+var canvasWidth = 70;
 var car;
 var crashed = false;
 var score = 0;
@@ -7,23 +7,50 @@ var speed = 1;
 var relativeSpeed =  5;
 var opponents = [];
 
+
+// Middle line controller
+var numberOfLines = 0;
+var lineHeight = 10;
+var linePadding = 20;
+var lineStroke = 1;
+var lineColor = 0;
+
+var startLineX;
+var startLineY;
+
+var endLineX;
+var endLineY;
+
 function setup() {
     createCanvas(canvasWidth, canvasHeight);
     background('#f2f2f2');
     car = new Car(true);
     opponents[0] = new Car(false);
+
+
+
 }
 
 function draw() {
     background(51);
     car.show();
+    showMiddleLines();
+
+    for(var i = 0; i < middleLineArray.length; i++) {
+        middleLineArray[i]['y1'] += 1;
+        middleLineArray[i]['y2'] += 1;
+    }
+
+    numberOfLines = middleLinesNumber();
+
     opponents[0].show();
     crashed = car.checkedIfCrashed(car.x, car.y, opponents[0].x, opponents[0].y);
     if(!crashed) {
         opponents[0].applyForce( relativeSpeed * speed);
     }
     else {
-        console.log('Game Over')
+        console.log('Game Over');
+        noLoop();
     }
 
 }
@@ -55,5 +82,6 @@ function updateScore(score) {
         vel = 5;
 
     relativeSpeed = Math.floor(vel);
-
 }
+
+

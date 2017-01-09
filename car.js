@@ -43,7 +43,7 @@ function Car(player) {
            if( randomNumber )
                this.x = 0;
            else
-                this.x = 32;
+                this.x = 35;
 
             if(speed > 1){
                 score += 4;
@@ -63,7 +63,7 @@ function Car(player) {
         if( position === 'left' ) {
             this.x = 0;
         } else {
-            this.x = 32;
+            this.x = 35;
         }
     }
 
